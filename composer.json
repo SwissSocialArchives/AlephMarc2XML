@@ -1,0 +1,20 @@
+{
+  "name": "SwissSocialArchives/AlephMarc2XML",
+  "description": "This php class converts an MARC output from Aleph to a XML file",
+  "type": "library",
+  "keywords": ["MARC", "XML", "Aleph"],
+  "homepage": "https://github.com/SwissSocialArchives/AlephMarc2XML",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Swiss Social Archives",
+      "homepage": "http://www.soazialarchiv.ch"
+    }
+  ],
+  "require": {
+    "php": ">=5.2"
+  },
+  "autoload": {
+    "psr-0": { "HTMLPurifier": "src/" }
+  }
+}
