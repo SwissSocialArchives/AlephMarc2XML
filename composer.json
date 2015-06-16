@@ -1,5 +1,5 @@
 {
-  "name": "SwissSocialArchives/AlephMarc2XML",
+  "name": "swiss-social-archives/alephmarc2xml",
   "description": "This php class converts an MARC output from Aleph to a XML file",
   "type": "library",
   "keywords": ["MARC", "XML", "Aleph"],
