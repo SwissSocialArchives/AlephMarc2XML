@@ -106,18 +106,27 @@ class AlephMarc2XML {
                         $value = trim(implode(' ', $rawSubFieldArray));
                     }
 
-                    $subField = $dataField->addChild('subfield', $value);
+                    $subField = $dataField->addChild('subfield', $this->escapeForXML($value));
                     $subField->addAttribute('key', $key);
 
                 }
             } else {
                 // create data field
-                $controlField  = $record->addChild('field', $rawFieldLines[1]);
+                $controlField  = $record->addChild('field', $this->escapeForXML($rawFieldLines[1]));
                 $controlField->addAttribute('key', $rawFieldLines[0]);
 
             }
 
         }
+    }
+
+    /**
+     * @param $input
+     * @return mixed
+     */
+    private function escapeForXML($input)
+    {
+        return str_replace('&', '&amp;', $input);
     }
 
 }
