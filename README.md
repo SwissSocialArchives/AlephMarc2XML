@@ -4,8 +4,14 @@ This php class converts an MARC output from Aleph to a XML file
 ## Usage
 
 ```php
-$inputFileName = 'down.txt';
-$marc = new Marc2XML($inputFileName);
+$marc = new Marc2XML();
+$marc->setFileName('down.txt');
+$xml = $marc->get();
+```
+or
+```php
+$marc = new Marc2XML();
+$marc->setContent($content); // String with Marc
 $xml = $marc->get();
 ```
 
