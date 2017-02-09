@@ -14,20 +14,38 @@ class AlephMarc2XML {
     private $records;
 
     /**
-     * @param $filename
      * @throws Exception
      */
-    public function __construct($filename)
+    public function __construct()
     {
         $this->records = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><collection />');
+    }
 
+    /**
+     * @param string $filename
+     */
+    public function setFileName($filename)
+    {
         $rawRecords = $this->readRecordsFromFile($filename);
 
         foreach($rawRecords as $rawRecord) {
             $this->processRawRecord($rawRecord);
         }
-
     }
+
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $rawRecords = $this->readRecordsFromContent($content);
+
+        foreach($rawRecords as $rawRecord) {
+            $this->processRawRecord($rawRecord);
+        }
+    }
+
 
     /**
      * @return SimpleXMLElement
@@ -49,14 +67,25 @@ class AlephMarc2XML {
             throw new Exception('Input file does not exist¨!');
         }
 
-        $input = file_get_contents($filename);
+        $contents = file_get_contents($filename);
+
+        return $this->readRecordsFromContent($contents);
+    }
+
+    /**
+     * @param $input
+     * @return array
+     * @throws Exception
+     */
+    private function readRecordsFromContent($input)
+    {
         if(empty($input)) {
-            throw new Exception('Input file is empty!');
+            throw new Exception('Input is empty!');
         }
         $input = str_replace(PHP_EOL.'      ', PHP_EOL, $input);
         $rawRecords = explode(PHP_EOL.'*****'.PHP_EOL.'Dokument', $input);
         if(count($rawRecords) < 2) {
-            throw new Exception('No records in unput file!!');
+            throw new Exception('No records in input found!!');
         }
 
         // amount of record test
@@ -71,6 +100,7 @@ class AlephMarc2XML {
 
         return $rawRecords;
     }
+
 
     /**
      * @param $rawRecord
